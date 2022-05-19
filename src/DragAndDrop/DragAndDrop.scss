@@ -1,0 +1,14 @@
+@import "../App";
+
+.dragAndDrop{
+  height: 20rem;
+  border: 3px dotted $border_color;
+  position: relative;
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: column;
+  align-items: center;
+  &.active{
+    border-color: $success_color;
+  }
+}

@@ -1,7 +1,14 @@
+import {useContext} from "react";
+import Context from "../Context";
+
 function Navigation() {
+    const context = useContext(Context);
+
     return(
         <div className='navigation'>
-            <button>AddMenuItem</button>
+            <button className='btn' onClick={()=>{
+                context.setShowModal(true)
+            }}>AddMenuItem</button>
         </div>
     )
 }
