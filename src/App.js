@@ -9,19 +9,24 @@ import ModalWindow from "./ModalWindow/ModalWindow";
 function App() {
 
   const [showModal, SetShowModal] = useState(false);
+  const [nav,setNav]= useState([]);
+  const [addSubNav,setAddSubNav]= useState(false);
   const [navigation, setNavigation] = useState({
       navItem: '',
       navItemLink: '',
       graphics: false,
       navItemHidden: false,
-
   })
 
   return (
       <Context.Provider value={{
           setShowModal:SetShowModal,
-          navigation: navigation,
-          setNavigation:setNavigation,
+          addSubNav,
+          setAddSubNav,
+          nav,
+          setNav,
+          navigation,
+          setNavigation,
       }}>
           <div className="App container">
               <header className="App-header">
