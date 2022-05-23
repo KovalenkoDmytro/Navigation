@@ -11,6 +11,7 @@ function App() {
   const [showModal, SetShowModal] = useState(false);
   const [nav,setNav]= useState([]);
   const [addSubNav,setAddSubNav]= useState(false);
+  const [parrent, setParrent] = useState();
   const [navigation, setNavigation] = useState({
       navItem: '',
       navItemLink: '',
@@ -27,6 +28,8 @@ function App() {
           setNav,
           navigation,
           setNavigation,
+          setParrent,
+          parrent
       }}>
           <div className="App container">
               <header className="App-header">

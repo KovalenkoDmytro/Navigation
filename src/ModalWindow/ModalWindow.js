@@ -15,6 +15,7 @@ function ModalWindow(props) {
             <button className='btn close' onClick={() => {
                 context.setShowModal(false);
                 context.setAddSubNav(false);
+                context.setParrent(context.nav.length );
             }}>X
             </button>
             <div className='input_group itemName'>

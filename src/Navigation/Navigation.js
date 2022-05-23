@@ -14,14 +14,17 @@ function Navigation() {
             <ul className="subNav">
                 {
                     sumItems.props.map((element, indes) => (
-                        <li key={indes}>{element.navItem}</li>
+                        <li className='sunNavItem' key={indes}>
+                            <span className='subNavItemTitle' onClick={(event) => {
+                                event.target.parentElement.querySelector('.editBar').classList.remove('--hidden')
+                            }}>{element.navItem}</span>
+                            <EditBar/>
+                        </li>
                     ))
                 }
             </ul>
         );
         return (
-
-
             menuItems.map((element, index) => (
                 <li className='navItem' key={index} data-name={element.navItem}>
                     <span className='navItemTitle' onClick={(event) => {
@@ -31,8 +34,6 @@ function Navigation() {
                     {element.subNav ? <SubNav props={element.subNav}/> : null}
                 </li>
             ))
-
-
         )
 
     }
@@ -42,6 +43,7 @@ function Navigation() {
         <div className='navigation'>
             <button className='btn' onClick={() => {
                 context.setShowModal(true)
+                context.setParrent(context.nav.length + 1)
             }}>AddMenuItem
             </button>
             <ul className='items'>
