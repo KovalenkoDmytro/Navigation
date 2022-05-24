@@ -7,18 +7,23 @@ import EditBar from "../EditBar/EditBar";
 function Navigation() {
     const context = useContext(Context);
 
+
+
+
+
+
     function showNavItems(menuItems) {
 
 
         const SubNav = sumItems => (
             <ul className="subNav">
                 {
-                    sumItems.props.map((element, indes) => (
-                        <li className='sunNavItem' key={indes}>
+                    sumItems.props.map((element, index) => (
+                        <li className='sunNavItem' key={index}  data-id={element.id}>
                             <span className='subNavItemTitle' onClick={(event) => {
                                 event.target.parentElement.querySelector('.editBar').classList.remove('--hidden')
-                            }}>{element.navItem}</span>
-                            <EditBar/>
+                            }}>{element.name}</span>
+                            <EditBar parrent={element.id}/>
                         </li>
                     ))
                 }
@@ -26,12 +31,13 @@ function Navigation() {
         );
         return (
             menuItems.map((element, index) => (
-                <li className='navItem' key={index} data-name={element.navItem}>
+                <li className='navItem' key={index} data-id={element.id}>
                     <span className='navItemTitle' onClick={(event) => {
                         event.target.parentElement.querySelector('.editBar').classList.remove('--hidden')
-                    }}>{element.navItem}</span>
-                    <EditBar/>
-                    {element.subNav ? <SubNav props={element.subNav}/> : null}
+                    }}>{element.name}</span>
+                    <EditBar parrent={element.id}/>
+
+                    {element.children ? <SubNav props={element.children}/> : null}
                 </li>
             ))
         )
@@ -43,7 +49,6 @@ function Navigation() {
         <div className='navigation'>
             <button className='btn' onClick={() => {
                 context.setShowModal(true)
-                context.setParrent(context.nav.length + 1)
             }}>AddMenuItem
             </button>
             <ul className='items'>

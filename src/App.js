@@ -10,26 +10,28 @@ function App() {
 
   const [showModal, SetShowModal] = useState(false);
   const [nav,setNav]= useState([]);
-  const [addSubNav,setAddSubNav]= useState(false);
-  const [parrent, setParrent] = useState();
-  const [navigation, setNavigation] = useState({
-      navItem: '',
-      navItemLink: '',
-      graphics: false,
-      navItemHidden: false,
-  })
+  // const [addSubNav,setAddSubNav]= useState(false);
+  const [parent, setParent] = useState();
+  // const [navigation, setNavigation] = useState([]
+  //     {
+  //     navItem: '',
+  //     navItemLink: '',
+  //     graphics: false,
+  //     navItemHidden: false,
+  // }
+  // )
 
   return (
       <Context.Provider value={{
           setShowModal:SetShowModal,
-          addSubNav,
-          setAddSubNav,
+          // addSubNav,
+          // setAddSubNav,
           nav,
           setNav,
-          navigation,
-          setNavigation,
-          setParrent,
-          parrent
+          // navigation,
+          // setNavigation,
+          setParent,
+          parent
       }}>
           <div className="App container">
               <header className="App-header">

@@ -1,15 +1,17 @@
 import Context from "../Context";
 import {useContext} from "react";
 
-function EditBar(){
+function EditBar(props){
     const context = useContext(Context);
+    const parrentItem = props.parrent;
     return(
         <div className='editBar --hidden'>
             <button>edit</button>
             <button>del</button>
             <button onClick={(event) => {
-                const parrentItem = event.target.closest('.navItem').getAttribute('data-name');
-                context.setAddSubNav(parrentItem);
+
+                context.setParent(parrentItem)
+
                 context.setShowModal(true);
             }}
             >add subnav

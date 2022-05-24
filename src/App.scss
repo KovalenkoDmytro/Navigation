@@ -380,3 +380,21 @@ textarea {
     }
   }
 }
+
+
+.items{
+  .navItem{
+    font-size: 2rem;
+    font-weight: bold;
+    background: #10ac82;
+    .subNav{
+      .sunNavItem{
+        margin-left: 3rem;
+        font-size: 1.6rem;
+        background: #e35c5c;
+      }
+    }
+  }
+
+
+}
