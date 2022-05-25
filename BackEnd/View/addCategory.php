@@ -1,34 +1,29 @@
-<div class='modalWindow'>
-    <button class='btn close'>X</button>
-    <div class='input_group itemName'>
-        <p>Category Name</p>
-        <input  type='text'/>
-    </div>
-    <div class='input_group itemLink'>
-        <p>Category Link</p>
-        <input  type='text'/>
-    </div>
-    <div class='itemImg'>
-        <p>Add graphics ?</p>
-        <div class='itemImg__radio'>
-            <label for='accept'> Yes</label>
-            <input type='radio' name="img" id='accept'/>
-        </div>
-        <div class='itemImg__radio'>
-            <label for='negative'> No</label>
-            <input type='radio' name="img" id='negative'/>
-        </div>
-    </div>
-    <div class='itemHidden'>
-        <p>is to hide on page?</p>
-        <div class='itemHidden__radio'>
-            <label for='accept'> Yes</label>
-            <input  type='radio' name="hidden" id='accept'/>
-        </div>
-        <div class='itemHidden__radio'>
-            <label for='negative'> No</label>
-            <input type='radio' name="hidden" id='negative'/>
-        </div>
-    </div>
-    <button class='btn'>ok</button>
-</div>
+<?php
+    require_once ('../DataBase/actions.php');
+    if(!empty($_GET['parent_id'])){
+        $parent = $_GET['parent_id'];
+    }elseif (!empty($_GET['action']) && ($_GET['action']='closePage')){
+        $host = $_SERVER['HTTP_HOST'];
+        $uri = dirname(rtrim(dirname($_SERVER['PHP_SELF']), '/\\'));
+        header("Location: http://$host$uri");
+    }
+
+    echo '<form action="../DataBase/actions.php" method="post">
+             <input type="hidden" name="action" value="add"/>
+            <div>
+                <p>Category Name</p>
+                <input type="text" name="itemTitle"/>
+            </div>
+            <div>
+                <p>Category Link</p>
+                <input type="text" name="itemLint"/>
+            </div>';
+            if(!empty($parent)){
+                echo '<input type="hidden" name="parentId" value="'.$parent.'"/>';
+            }
+    echo '<button type="submit">add</button>
+           </form>
+           <a href="?action=closePage">X</a>
+'
+?>
+

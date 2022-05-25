@@ -1,24 +1,35 @@
 <?php
 require_once('connect.php');
 
-function addToDB($data)
-{
-    global $connect;
-    $data = json_decode($data);
-    $itemName = $data->navItem;
-    $itemParent = $data->parent;
-
-    $sql = "INSERT INTO navigation (name, parrent) VALUES ('$itemName','$itemParent')";
-
-
-    if (mysqli_query($connect, $sql)) {
-        echo 'data was added ';
-    } else {
-        echo 'something was wrong ';
-    };
+if (!empty($_POST['action']) && ($_POST['action'] === 'add')) {
+    addToDB($_POST);
 }
 
-function getItemsFromDB():array|null {
+
+
+function addToDB(array $data): void
+{
+    global $connect;
+
+    $itemTitle = $data['itemTitle'];
+    $itemLink = $data['itemLint'];
+    $itemParent = $data['parentId'];
+
+    if (!empty($itemParent)) {
+        $parenSQL = "INSERT INTO navigation (title, item_link,parent_id) VALUES ('$itemTitle', '$itemLink','$itemParent')";
+        mysqli_query($connect, $parenSQL);
+    } else {
+        $sql = "INSERT INTO navigation (title, item_link) VALUES ('$itemTitle', '$itemLink')";
+        mysqli_query($connect, $sql);
+    }
+    $host = $_SERVER['HTTP_HOST'];
+    $uri = dirname(rtrim(dirname($_SERVER['PHP_SELF']), '/\\'));
+    header("Location: http://$host$uri");
+
+}
+
+function getItemsFromDB(): array|null
+{
     global $connect;
 
     $sql = "SELECT * FROM navigation";
@@ -40,4 +51,31 @@ function getItemsFromDB():array|null {
         }
     };
     return $array_navItems;
+}
+
+function delFromDB(array $data): void
+{
+    global $connect;
+
+    $itemTitle = $data['category_id'];
+    $sql = "DELETE FROM navigation where id = {$itemTitle}";
+    mysqli_query($connect, $sql);
+    $host = $_SERVER['HTTP_HOST'];
+    $uri = $_SERVER['PHP_SELF'];
+    header("Location: http://$host$uri");
+
+}
+
+function getItem(string $itemID){
+    global $connect;
+
+    $sql = "SELECT * FROM navigation WHERE `id` = '$itemID' ";
+    $result = mysqli_query($connect, $sql);
+
+    session_start();
+    $_SESSION["menuItem"]= mysqli_fetch_assoc($result);
+
+    $host = $_SERVER['HTTP_HOST'];
+    $uri = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
+    header("Location: http://$host$uri/View/editCategory.php");
 }
