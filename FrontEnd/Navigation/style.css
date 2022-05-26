@@ -1,0 +1,20 @@
+
+.navItems{
+   border: 1px solid #c4c7c8;
+}
+
+.navItems .navItem {
+   text-decoration: underline;
+    cursor: pointer;
+}
+.navItems .navItem p:hover {
+    color: #0071c2;
+}
+
+.navItems .navItem .actions{
+    display: none;
+}
+
+.navItems .navItem .actions.__show{
+    display: block;
+}

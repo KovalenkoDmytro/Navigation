@@ -3,6 +3,8 @@ require_once('connect.php');
 
 if (!empty($_POST['action']) && ($_POST['action'] === 'add')) {
     addToDB($_POST);
+}elseif (!empty($_POST['action']) && ($_POST['action'] === 'edit_note')){
+    updateItem($_POST);
 }
 
 
@@ -78,4 +80,21 @@ function getItem(string $itemID){
     $host = $_SERVER['HTTP_HOST'];
     $uri = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
     header("Location: http://$host$uri/View/editCategory.php");
+}
+
+function updateItem (array $data){
+    var_dump($data);
+
+    global $connect;
+    $itemTitle = $data['itemTitle'];
+    $itemLink = $data['itemLint'];
+    $itemID = $data['itemId'];
+
+    $sql = "UPDATE navigation SET title ='$itemTitle', item_link ='$itemLink' WHERE id='$itemID'";
+    mysqli_query($connect, $sql);
+
+    $host = $_SERVER['HTTP_HOST'];
+    $uri = dirname(rtrim(dirname($_SERVER['PHP_SELF']), '/\\'));
+    header("Location: http://$host$uri");
+
 }
